@@ -1,7 +1,16 @@
 import React from "react";
 import { Card, ProgressBar, Button, Stack } from "react-bootstrap";
-import { currencyFormatter } from "./currency";
-export default function BudgetCard({ name, amount, max, gray }) {
+
+import { currencyFormatter } from "../currency";
+export default function BudgetCard({
+  name,
+  amount,
+  max,
+  gray,
+  onAddExpenseClick,
+  hideButtons,
+  onViewExpenseClick
+}) {
   const classNames = [];
   if (amount > max) {
     classNames.push("bg-danger", "bg-opacity-10");
@@ -15,25 +24,33 @@ export default function BudgetCard({ name, amount, max, gray }) {
           <div className="me-2">{name}</div>
           <div className="d-flex align-item-baseline">
             {currencyFormatter.format(amount)}
-            <span className="text-muted fs-6 ms-1">
-              {" "}
-              /{currencyFormatter.format(max)}
-            </span>
+            {max && (
+              <span className="text-muted fs-6 ms-1">
+                /{currencyFormatter.format(max)}
+              </span>
+            )}
           </div>
         </Card.Title>
-        <ProgressBar
-          className="rounded-pill"
-          variant={getProgressBarVar(amount, max)}
-          min={0}
-          max={max}
-          now={amount}
-        />
-        <Stack direction="horizental" gap="2" className="mt-4">
-          <Button variant="outline-primary" className="ms-auto">
+        {max && (
+          <ProgressBar
+            className="rounded-pill"
+            variant={getProgressBarVar(amount, max)}
+            min={0}
+            max={max}
+            now={amount}
+          />
+        )}
+       {!hideButtons &&(<  Stack direction="horizental" gap="2" className="mt-4">
+          <Button
+            variant="outline-primary"
+            className="ms-auto"
+            onClick={onAddExpenseClick}
+          >
             Add Expenses
           </Button>
-          <Button>View Expenses</Button>
+          <Button variant="outline-primary"onClick={onViewExpenseClick} >View Expenses</Button>
         </Stack>
+        )}
       </Card.Body>
     </Card>
   );
