@@ -35,6 +35,7 @@ export default function AddBudgetModal({ show, handleClose }) {
               required
               min={0}
               step={0.01}
+              
             />
           </Form.Group>
           <div className="d-flex justify-content-end">
