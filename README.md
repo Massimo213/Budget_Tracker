@@ -1,3 +1,4 @@
-To be Able to Run this Project you Can simply run first the command : cd bt
-and then you run the following command : npm start 
+To be Able to Run this Project you Can simply run the following command : 
+1. cd bt
+2. npm start 
 and your good to Go!
